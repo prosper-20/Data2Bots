@@ -1,7 +1,7 @@
 from time import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Item, OrderItem, Order
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
 from django.contrib import messages
 
@@ -27,9 +27,9 @@ class HomeView(ListView):
     paginate_by = 1
 
 
-class OrderSummaryView(DetailView):
-    model = Item
-    template_name = "order-summary.html"
+class OrderSummaryView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "order-summary.html")
 
 
 class ItemDetailView(DetailView):
