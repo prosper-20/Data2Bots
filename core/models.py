@@ -7,6 +7,7 @@ class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
+   
 
     def __str__(self):
         return self.title
@@ -16,6 +17,7 @@ class Item(models.Model):
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
