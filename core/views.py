@@ -1,4 +1,5 @@
 from time import timezone
+from tkinter.messagebox import RETRY
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Item, OrderItem, Order
 from django.views.generic import ListView, DetailView, View
@@ -34,6 +35,10 @@ class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'order-summary.html', context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("/")
