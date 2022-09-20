@@ -63,6 +63,7 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated")
+            return redirect("order-summary", slug=slug)
         else:
             order.items.add(order_item)
             messages.info(request, "This item was added to your cart")
@@ -121,7 +122,7 @@ def remove_single_item_from_cart(request, slug):
             else:
                 order.items.remove(order_item)
             messages.info(request, "This item quantity was updated ")
-            return redirect('order_summary')
+            return redirect('order-summary')
         else:
             messages.info(request, "This item was not in your cart")
             return redirect('product', slug=slug)
