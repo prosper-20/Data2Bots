@@ -2,7 +2,7 @@ from time import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Item, OrderItem, Order
 from django.views.generic import ListView, DetailView
-from django.utils import timezonetim
+from django.utils import timezone
 
 def products(request):
     context = {
@@ -39,6 +39,8 @@ def add_to_cart(request, slug):
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
+        else:
+            order.items.add(order_item)
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user, ordered_date=ordered_date)
