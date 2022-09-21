@@ -32,3 +32,10 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class UserPropertiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+
+        fields = ["pk", "email", "username"]

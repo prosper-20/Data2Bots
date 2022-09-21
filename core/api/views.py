@@ -45,3 +45,38 @@ class ItemListView(ListCreateAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
+
+
+@api_view(["GET"])
+@permission_classes((IsAuthenticated,))
+def account_properties_view(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = UserPropertiesSerializer(user)
+        return Response(serializer.data)
+
+
+
+@api_view(["PUT"])
+@permission_classes((IsAuthenticated,))
+def update_user_view(request):
+    try:
+        user = request.user
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "PUT":
+        serializer = UserPropertiesSerializer(user, data=request.data)
+        data = {}
+        if serializer.is_valid():
+            serializer.save()
+            data["response"] = "Account update success"
+            return Response(data=data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+
