@@ -42,6 +42,6 @@ def registration_view(request):
 class ItemListView(ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
-    authentication_classes = (BasicAuthentication,)
+    authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
