@@ -4,7 +4,7 @@ from .serializers import ItemSerializer, RegistrationSerializer
 from rest_framework.decorators import api_view
 from core.models import Item
 from rest_framework.generics import ListCreateAPIView
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
@@ -43,4 +43,5 @@ class ItemListView(ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
     authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
