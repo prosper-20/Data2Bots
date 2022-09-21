@@ -79,8 +79,10 @@ def update_user_view(request):
         serializer = UserPropertiesSerializer(user, data=request.data)
         data = {}
         if serializer.is_valid():
-            serializer.save()
+            updated_user = serializer.save()
             data["response"] = "Account update success"
+            data["username"] = updated_user.username
+            data["email"] = updated_user.email
             return Response(data=data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
