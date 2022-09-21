@@ -20,6 +20,20 @@ def api_item_list_view(request):
         serializer = ItemSerializer(items, many=True)
         return Response(serializer.data)
 
+@api_view(["POST"])
+def registration_view(request):
+    if request.method == "POST":
+        serializer = RegistrationSerializer(data=request.data)
+        data = {}
+        if serializer.is_valid():
+            user = serializer.save()
+            data["Response"] = "Successfully registered a new user"
+            data["email"] = user.email
+            data["username"] = user.username
+        else:
+            data = serializer.errors
+        return Response(data)
+
 
 
 class ItemListView(ListCreateAPIView):
