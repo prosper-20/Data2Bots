@@ -2,6 +2,9 @@ import re
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.conf import settings
+from django.db.models.signals import post_save
+
 
 
 class Item(models.Model):
@@ -52,5 +55,11 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
 
 

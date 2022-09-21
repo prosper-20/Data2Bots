@@ -5,7 +5,7 @@ from .views import api_item_list_view, ItemListView, registration_view
 
 
 urlpatterns = [
-    path("", ItemListView, name="api-home"),
+    path("", ItemListView.as_view(), name="api-home"),
     path("register", registration_view, name="register"),
 
 ]
