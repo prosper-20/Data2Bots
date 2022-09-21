@@ -7,6 +7,7 @@ from rest_framework.generics import ListCreateAPIView
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authtoken.models import Token
 
 
 @api_view(["GET"])
