@@ -1,13 +1,14 @@
 from rest_framework import status
 from rest_framework.response  import Response
-from .serializers import ItemSerializer, RegistrationSerializer
-from rest_framework.decorators import api_view
+from .serializers import ItemSerializer, RegistrationSerializer, UserPropertiesSerializer
+from rest_framework.decorators import api_view, permission_classes
 from core.models import Item
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
 
 @api_view(["GET"])
