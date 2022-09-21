@@ -3,6 +3,7 @@ from core.models import Item
 
 
 class ItemSerializer(serializers.ModelSerializer):
-    model = Item
+    class Meta:
+        model = Item
 
-    fields = ["title", "price", "slug"]
+        fields = ["title", "price", "slug"]

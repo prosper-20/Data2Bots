@@ -1,11 +1,8 @@
-import imp
 from rest_framework import status
 from rest_framework.response  import Response
 from .serializers import ItemSerializer
 from rest_framework.decorators import api_view
 from core.models import Item
-
-from core.api import serializers
 
 
 @api_view(["GET"])
