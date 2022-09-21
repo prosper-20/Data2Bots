@@ -50,6 +50,7 @@ class ItemListView(ListCreateAPIView):
 class ItemDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    lookup_field = "slug"
 
 
 @api_view(["GET"])
