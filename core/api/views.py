@@ -3,7 +3,7 @@ from rest_framework.response  import Response
 from .serializers import ItemSerializer, RegistrationSerializer, UserPropertiesSerializer
 from rest_framework.decorators import api_view, permission_classes
 from core.models import Item
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
@@ -46,6 +46,10 @@ class ItemListView(ListCreateAPIView):
     authentication_classes = (TokenAuthentication,)
     permission_classes = (IsAuthenticated,)
     pagination_class = PageNumberPagination
+
+class ItemDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = Item.objects.all()
+    serializer_class = ItemSerializer
 
 
 @api_view(["GET"])
