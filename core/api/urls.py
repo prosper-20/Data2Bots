@@ -1,7 +1,7 @@
 from django.urls import path
 
 from core import api
-from .views import api_item_list_view, ItemListView, 
+from .views import api_item_list_view, ItemListView, registration_view
 
 
 urlpatterns = [
